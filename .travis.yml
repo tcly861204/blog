@@ -1,0 +1,44 @@
+language: node_js
+
+node_js:
+  - 8.9.4
+
+branches:
+  only:
+  - master
+
+env:
+  global:
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - git config --global user.name "${U_NAME}"
+  - git config --global user.email "${U_EMAIL}"
+
+install:
+  - npm install hexo-cli -g
+  - npm install
+
+
+notifications:
+  email:
+    recipients:
+    - 356671808@qq.com
+    on_success: always
+    on_failure: always
+
+script:
+  - hexo clean
+  - hexo g
+
+after_script:
+  - cp README.md ./public/
+  - cd ./public
+  - git init
+  - git add .
+  - git commit -m "update blog components"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
+  - rm -rf public
