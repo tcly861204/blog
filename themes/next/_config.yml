@@ -359,12 +359,12 @@ reward_settings:
   # If true, reward would be displayed in every article by default.
   # You can show or hide reward in a specific article throuth `reward: true | false` in Front-matter.
   enable: true
-  animation: true
+  animation: false
   #comment: Donate comment here
 
 reward:
   wechatpay: /images/wechatpay.png
-  alipay: /images/alipay.png
+  alipay: /images/alipay.jpg
   #bitcoin: /images/bitcoin.png
 
 # Related popular posts
@@ -994,8 +994,8 @@ pace_theme: pace-theme-minimal
 # Canvas-nest
 # Dependencies: https://github.com/theme-next/theme-next-canvas-nest
 canvas_nest:
-  enable: true
-  onmobile: true # display on mobile or not
+  enable: false
+  onmobile: false # display on mobile or not
   color: "0,0,255" # RGB values, use ',' to separate
   opacity: 0.5 # the opacity of line: 0~1
   zIndex: -1 # z-index property of the background
@@ -1064,8 +1064,8 @@ vendors:
   # See: https://github.com/tuupola/jquery_lazyload
   # Example:
   # lazyload: //cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js
-  # lazyload: //cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js
-  lazyload:
+  lazyload: //cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js
+  # lazyload:
 
   # Internal version: 1.2.1
   # See: http://velocityjs.org
@@ -1125,8 +1125,8 @@ vendors:
   # Internal version: 1.0.0
   # See: https://github.com/zproo/canvas-ribbon
   # Example:
-  # canvas_ribbon: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js
-  canvas_ribbon:
+  canvas_ribbon: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js
+  # canvas_ribbon:
 
   # Internal version: 3.3.0
   # See: https://github.com/ethantw/Han
@@ -1159,20 +1159,20 @@ vendors:
   # Internal version: 1.0.0
   # See: https://github.com/theme-next/theme-next-bookmark
   # Example:
-  # bookmark: //cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js
-  bookmark:
+  bookmark: //cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js
+  # bookmark:
 
   # Internal version: 1.1
   # See: https://github.com/theme-next/theme-next-reading-progress
   # Example:
-  # reading_progress: //cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js
-  reading_progress:
+  reading_progress: //cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js
+  # reading_progress:
 
   # leancloud-storage
   # See: https://www.npmjs.com/package/leancloud-storage
   # Example:
-  # leancloud: //cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js
-  leancloud:
+  leancloud: //cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js
+  # leancloud:
 
   # valine
   # See: https://github.com/xCss/Valine
@@ -1211,3 +1211,8 @@ vendors:
 css: css
 js: js
 images: images
+
+
+# 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enable: true
