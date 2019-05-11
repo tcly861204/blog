@@ -38,11 +38,6 @@
   {% endif %}
 </div>
 
-<i class="fa fa-user-md"></i>
-<span id="busuanzi_container_site_UV">
-  本站访客数：<span id="busuanzi_value_site_UV"></span>
-</span>
-
 {% if theme.footer.powered.enable %}
   <div class="powered-by">{#
   #}{{ __('footer.powered', next_url('https://hexo.io', 'Hexo', {class: 'theme-link'})) }}{#
