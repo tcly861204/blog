@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "hexo clean && hexo g",
-    "gulp": "gulp"
+    "dev": "hexo clean && hexo g && npm run gulp",
+    "gulp": "gulp",
+    "server": "hexo s"
   },
   "hexo": {
     "version": "3.8.0"

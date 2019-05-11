@@ -19,7 +19,6 @@ before_install:
   - git config --global user.email "${U_EMAIL}"
 
 install:
-  - npm install hexo-cli -g
   - npm install
 
 
@@ -31,8 +30,7 @@ notifications:
     on_failure: always
 
 script:
-  - hexo clean
-  - hexo g
+  - npm run dev
 
 after_script:
   - cp README.md ./public/
