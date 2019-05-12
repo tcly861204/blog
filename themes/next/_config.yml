@@ -157,13 +157,13 @@ baidu_push: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 # External url should start with http:// or https://
 menu:
-  主页: / || home
-  关于: /about/ || user
-  标签: /tags/ || tags
+  home: / || home
+  about: /about/ || user
+  tags: /tags/ || tags
   categories: /categories/ || th
-  文章: /archives/ || archive
-  schedule: /schedule/ || calendar
-  #sitemap: /sitemap.xml || sitemap
+  archives: /archives/ || archive
+  # schedule: /schedule/ || calendar
+  # sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
 
 # Enable / Disable menu icons / item badges.
@@ -724,9 +724,9 @@ likely:
 # Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin,Mailto,Reddit,Delicious,StumbleUpon,Pinterest,
 # GooglePlus,Tumblr,GoogleBookmarks,Newsvine,Evernote,Friendfeed,Vkontakte,Odnoklassniki,Mailru
 needmoreshare2:
-  enable: false
+  enable: true
   postbottom:
-    enable: false
+    enable: true
     options:
       iconStyle: box
       boxForm: horizontal
@@ -919,7 +919,7 @@ note:
 tabs:
   enable: true
   transition:
-    tabs: false
+    tabs: true
     labels: true
   border_radius: 0
 
@@ -938,7 +938,7 @@ pdf:
 
 # Mermaid tag
 mermaid:
-  enable: false
+  enable: true
   # Available themes: default | dark | forest | neutral
   theme: forest
   cdn: //cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js
@@ -1151,10 +1151,10 @@ vendors:
   # Internal version: 1.0.0
   # See: https://github.com/revir/need-more-share2
   # Example:
-  # needmoreshare2_js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js
-  # needmoreshare2_css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css
-  needmoreshare2_js:
-  needmoreshare2_css:
+  needmoreshare2_js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js
+  needmoreshare2_css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css
+  # needmoreshare2_js:
+  # needmoreshare2_css:
 
   # Internal version: 1.0.0
   # See: https://github.com/theme-next/theme-next-bookmark
