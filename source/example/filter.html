@@ -8,7 +8,16 @@
 </head>
 <body>
   <script>
-  
+    let arr = [
+      { name: 'a' },
+      { name: 'b' },
+      { name: 'a' },
+      { name: 'c' }
+    ];
+    let arr2 = arr.filter((item, index, arr) => {
+      return arr.findIndex(it => JSON.stringify(it) === JSON.stringify(item)) === index
+    })
+    console.log(arr2)
   </script>
 </body>
 </html>
