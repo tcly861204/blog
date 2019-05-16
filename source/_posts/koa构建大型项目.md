@@ -57,7 +57,7 @@ app.listen(3000);
 
 Koa写http服务器的形式与我们直接通过node http模块写的方式差别很大。第一部分析可知，node的http服务器创建来自于http.createServer等方法，Koa中是如何从原生方法封装成koa形式的服务器呢？搞懂这个原理也就搞懂了Koa框架设计的理念。
 
-## koa中的ctx
+## koa中的ctx对象
 
 server.context 扩展ctx的原型， 相当于ctx.prototype
 
@@ -90,8 +90,8 @@ router.get('/login', async ctx => {
 })
 ```
 
-
-
+ctx.state = 200;
+ctx.redirect 重定向
 
 ## koa-router
 
