@@ -7,6 +7,9 @@ let str = `# blog
 
 [![Build Status](https://www.travis-ci.org/tcly861204/blog.svg?branch=master)](https://www.travis-ci.org/tcly861204/blog)
 
+## 学习笔记
+
+
 `
 const files = fs.readdirSync(filePath);
 files.forEach(function(filename, _index){
