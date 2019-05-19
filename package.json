@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "hexo clean && hexo g && npm run gulp",
+    "mkdown": "node ./cread/node.js",
+    "dev": "hexo clean && npm run mkdown && hexo g && npm run gulp",
     "gulp": "gulp",
     "server": "hexo s"
   },
