@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const rootPath = path.resolve(__dirname, '..');
 const filePath = path.resolve(__dirname, '../source/_posts');
-let str = `# blog
+let str = `
+# blog
 个人创作
 
 [![Build Status](https://www.travis-ci.org/tcly861204/blog.svg?branch=master)](https://www.travis-ci.org/tcly861204/blog)
@@ -26,7 +27,7 @@ files.forEach(function(filename, _index){
         if (startIndexOf > 0) {
           let date = content.substr(startIndexOf + 6, 10)
           let name = filename.replace('.md', '')
-          str += '[' + name + '](https://tcly861204.github.io/' + date.split('-').join('/') + '/' + name + '/)\r\n\r\n'
+          str += '[' + name + '](https://tcly861204.github.io/' + date.split('-').join('/') + '/' + name + '/)\r\n'
         }
         if (_index === files.length - 1) {
           fs.writeFileSync(`${rootPath}/README.md`, str, function(err){
