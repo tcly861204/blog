@@ -6,7 +6,7 @@
     "mkdown": "node ./cread/node.js",
     "dev": "hexo clean && npm run mkdown && hexo g && npm run gulp",
     "gulp": "gulp",
-    "pre-commit": "npm run mkdown",
+    "precommit": "npm run mkdown",
     "server": "hexo s"
   },
   "hexo": {
