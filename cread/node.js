@@ -26,7 +26,7 @@ function readFile(files, index) {
         if (startIndexOf > 0) {
           let date = content.substr(startIndexOf + 6, 10)
           let name = filename.replace('.md', '')
-          str += (index + 1) + '. [' + name + '](https://tcly861204.github.io/' + date.split('-').join('/') + '/' + name + '/)\r\n'
+          str += (index + 1) + '. [' + name + '](https://tcly861204.github.io/' + date.replace(/\-/g, '/') + '/' + name + '/)\r\n'
         }
         if (index < files.length - 1) {
           index++
