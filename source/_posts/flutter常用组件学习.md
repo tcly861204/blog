@@ -29,6 +29,7 @@ child: Text(
 
 ## Container组件
 > 此组件有点类型html中的div
+
 ```
  child: Container(
   child: new Text(
@@ -51,4 +52,70 @@ child: Text(
     )
   ),
 ),
+```
+
+## Image组件
+```
+child: Container(
+  child: new Image.network(
+    'https://avatars2.githubusercontent.com/u/9635737',
+    // repeat: ImageRepeat.noRepeat,
+    repeat: ImageRepeat.repeat,
+    /* 混合
+    // color: Colors.greenAccent,
+    // colorBlendMode: BlendMode.darken,
+    // colorBlendMode: BlendMode.colorDodge,
+    // colorBlendMode: BlendMode.difference,
+    */
+    // fit: BoxFit.contain,
+    // fit: BoxFit.fill,
+    // fit: BoxFit.fitWidth
+    fit: BoxFit.cover
+  ),
+  width: 300.0,
+  height: 200.0,
+  color: Colors.lightBlue
+),
+```
+
+
+## 完整代码
+```
+import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title: 'text to Flutter',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('text a to flutter'),
+        ),
+        body: Center(
+          child: Container(
+            child: new Image.network(
+              'https://avatars2.githubusercontent.com/u/9635737',
+              // repeat: ImageRepeat.noRepeat,
+              repeat: ImageRepeat.repeat,
+              // color: Colors.greenAccent,
+              // colorBlendMode: BlendMode.darken,
+              // colorBlendMode: BlendMode.colorDodge,
+              // colorBlendMode: BlendMode.difference,
+              // fit: BoxFit.contain,
+              // fit: BoxFit.fill,
+              // fit: BoxFit.fitWidth
+              fit: BoxFit.cover
+            ),
+            width: 300.0,
+            height: 200.0,
+            color: Colors.lightBlue
+          ),
+        ),
+      )
+    );
+  }
+}
+
 ```
