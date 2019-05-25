@@ -10,6 +10,7 @@ copyright: ture
 # flutter常用组件学习
 
 ## text文本组件
+
 ```
 child: Text(
   'Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。Flutter可以与现有的代码一起工作。在全世界，Flutter正在被越来越多的开发者和组织使用，并且Flutter是完全免费、开源的。它也是构建未来的Google Fuchsi.',
@@ -28,6 +29,7 @@ child: Text(
 ```
 
 ## Container组件
+
 > 此组件有点类型html中的div
 
 ```
@@ -55,6 +57,7 @@ child: Text(
 ```
 
 ## Image组件
+
 ```
 child: Container(
   child: new Image.network(
@@ -76,6 +79,31 @@ child: Container(
   height: 200.0,
   color: Colors.lightBlue
 ),
+```
+
+## ListView组件
+
+```
+ body: new ListView(
+    // children: <Widget>[
+    //   new ListTile(
+    //     leading: new Icon(Icons.perm_camera_mic),
+    //     title: new Text('perm_camera_mic'),
+    //   ), new ListTile(
+    //     leading: new Icon(Icons.add_call),
+    //     title: new Text('add_call'),
+    //   ), new ListTile(
+    //     leading: new Icon(Icons.access_time),
+    //     title: new Text('access_time'),
+    //   )
+    // ],
+    children: <Widget>[
+      new Image.network('https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=77d1cd475d43fbf2da2ca023807fca1e/9825bc315c6034a8ef5250cec5134954082376c9.jpg'),
+      new Image.network('https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=77d1cd475d43fbf2da2ca023807fca1e/9825bc315c6034a8ef5250cec5134954082376c9.jpg'),
+      new Image.network('https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=77d1cd475d43fbf2da2ca023807fca1e/9825bc315c6034a8ef5250cec5134954082376c9.jpg'),
+      new Image.network('https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=77d1cd475d43fbf2da2ca023807fca1e/9825bc315c6034a8ef5250cec5134954082376c9.jpg'),
+    ],
+  ),
 ```
 
 
