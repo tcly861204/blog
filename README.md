@@ -15,3 +15,4 @@
 7. [koa构建大型项目](https://tcly861204.github.io/2019/05/14/koa构建大型项目/)
 8. [vue组件间通信六种方式](https://tcly861204.github.io/2019/05/19/vue组件间通信六种方式/)
 9. [中级前端工程师必须要掌握的28个JavaScript技巧](https://tcly861204.github.io/2019/06/04/中级前端工程师必须要掌握的28个JavaScript技巧/)
+10. [前端数据校验从建模开始](https://tcly861204.github.io/2019/07/31/前端数据校验从建模开始/)
