@@ -1,6 +1,6 @@
 ---
 layout: posts
-title: vue窗口自定义窗口
+title: vue实现自定义窗口
 date: 2019-07-31 12:44:00
 categories: 学习笔记
 tags: [javscript, vue]
@@ -10,30 +10,38 @@ copyright: ture
 ## 窗口调用方法
 ```
 import Vue from 'vue'
-let components = {}
-export default {
-  // 创建入口
-  install (config) {
-    if (!config.component) {
-      return
-    }
-    let __file = config.component.__file
-    if (components[__file]) {
-      // 对传入的值进行重新赋值
-      if ('options' in config && typeof config.options === 'object') {
-        Object.keys(config.options).map(key => {
-          components[__file].model._data[key] = config.options[key]
-        })
+let iNum = 0
+let _components = {}
+const _util = {
+  // 查找对应的模板组件
+  hasTemplate (__file) {
+    return new Promise((resolve, reject) => {
+      let _find = false
+      _components[__file].model.$children.map(child => {
+        if ('model__' in child && child.model__ === 'iv-custom-model' &&
+          child.$options.componentName === 'CustModelTemplate') {
+          _find = true
+          resolve(child)
+        }
+      })
+      if (!_find) {
+        reject(_find)
       }
-      this.show(__file)
-      return
-    }
-    this.created(config, __file) // 创建
-    this.listeners(config, __file) // 加入监听队列
-    this.show(__file)
+    })
+  },
+  // 查找组件
+  findComponent (config) {
+    let __file = null
+    Object.keys(_components).map(key => {
+      if (_components[key].component === config.component) {
+        __file = key
+      }
+    })
+    return __file
   },
   // 创建示例
-  created (config, __file) {
+  created (config) {
+    iNum++
     const Model = Vue.extend(config.component)
     let options = {
       provide () {
@@ -50,16 +58,19 @@ export default {
     let _model = new Model(options)
     _model.$mount()
     document.body.appendChild(_model.$el)
-    components[__file] = {
+    const __file = 'model_' + iNum
+    _components[__file] = {
+      component: config.component,
       model: _model, // model
       listen: false // 是否加入了监听
     }
-    return _model
+    _CustModel.show(__file)
+    this.listeners(config, __file)
   },
   // 监听
   listeners (config, __file) {
-    Object.keys(components).map(key => {
-      let cp = components[key]
+    Object.keys(_components).map(key => {
+      let cp = _components[key]
       if (!cp.listen) {
         cp.listen = true
         let _listen = Object.assign({
@@ -77,9 +88,9 @@ export default {
                   _listen[key].apply(cp.model, args)
                   if (key === 'close' || key === 'router') {
                     if ('destroy' in config && config.destroy) {
-                      this.destroy(config)
+                      _CustModel.destroy(config)
                     } else {
-                      this.hide(__file)
+                      _CustModel.hide(config)
                     }
                   }
                 })
@@ -95,46 +106,59 @@ export default {
       }
       return cp
     })
-  },
-  hasTemplate (__file) {
-    return new Promise((resolve, reject) => {
-      let _find = false
-      components[__file].model.$children.map(child => {
-        if ('model__' in child && child.model__ === 'iv-custom-model' &&
-          child.$options.componentName === 'CustModelTemplate') {
-          resolve(child)
-          _find = true
-        }
-      })
-      if (!_find) {
-        reject(_find)
+  }
+}
+const _CustModel = {
+  // 创建入口
+  install (config) {
+    if (!config.component) {
+      return
+    }
+    let __file = _util.findComponent(config)
+    if (__file) {
+      if ('options' in config && typeof config.options === 'object') {
+        Object.keys(config.options).map(key => {
+          _components[__file].model._data[key] = config.options[key]
+        })
       }
-    })
+      this.show(__file)
+    } else {
+      _util.created(config)
+    }
   },
   // 示例显示
   show: function (__file) {
-    this.hasTemplate(__file).then(child => {
+    _util.hasTemplate(__file).then(child => {
       child.visible = true
     })
   },
   // 示例隐藏
-  hide: function (__file) {
-    this.hasTemplate(__file).then(child => {
-      child.visible = false
-    })
+  hide: function (config) {
+    if (config && config.component) {
+      let __file = _util.findComponent(config)
+      if (__file) {
+        _util.hasTemplate(__file).then(child => {
+          child.visible = false
+        })
+      }
+    }
   },
   // 销毁
   destroy: function (config) {
     if (config && config.component) {
-      let __file = config.component.__file
-      if (__file in components && components[__file]) {
-        components[__file].model.$el.parentNode.removeChild(components[__file].model.$el)
-        components[__file] = null
-        delete components[__file]
+      let __file = _util.findComponent(config)
+      if (__file) {
+        _components[__file].model.$destroy(true)
+        _components[__file].model.$el.parentNode.removeChild(_components[__file].model.$el)
+        _components[__file] = null
+        delete _components[__file]
       }
     }
   }
 }
+
+export default _CustModel
+
 ```
 
 ## 配套窗口模板
@@ -145,11 +169,12 @@ export default {
       <section class="iv-custom-model__header"
       @mousedown.stop="onMouseDownHandle"
       :style="headStyle" v-if="header">
-        <slot name="header">
+        <i v-if="icon" :style="`font-size: ${iconSize}px`" :class="['title-icon', icon]" />
+        <slot class="iv-custom-model__header-title" name="header">
           <h2 class="iv-custom-model__header-title" :style="titleStyle">{{title}}</h2>
-          <Icon v-if="full" :class="full" :type="fullFlag ? 'ios-contract' : 'ios-expand'" size="18" @click="onFullHandle" />
-          <i class="close omd omd-close" @click.stop="onCloseHandle" />
         </slot>
+        <i v-if="full" :class="['full', 'ivu-icon', `ivu-icon-${fullFlag ? 'ios-contract' : 'ios-expand'}`]" @click="onFullHandle" />
+        <i class="close omd omd-close" @click.stop="onCloseHandle" />
       </section>
       <section class="iv-custom-model__main" :style="mainStyles">
         <Spin fix v-if="pageLoading"></Spin>
@@ -181,6 +206,14 @@ export default {
     pageLoading: {
       type: Boolean,
       default: false
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    iconSize: {
+      type: [String, Number],
+      default: 22
     },
     mask: {
       type: Boolean,
@@ -224,7 +257,7 @@ export default {
     },
     zIndex: {
       type: Number,
-      default: 1200
+      default: 2
     },
     titleStyle: {
       type: Object,
@@ -278,15 +311,25 @@ export default {
       }
     }
   },
+  watch: {
+    visible: {
+      handler (v) {
+        this.$emit('on-visible-change', v)
+      }
+    },
+    immediate: true,
+    deep: true
+  },
   computed: {
     maskStyle () {
       if (this.mask) {
         return {
-          zIndex: 1000,
+          zIndex: this.zIndex,
           background: `rgba(0, 0, 0, 0.2)`
         }
       } else {
         return {
+          zIndex: this.zIndex,
           background: `rgba(0, 0, 0, 0)`
         }
       }
@@ -295,10 +338,9 @@ export default {
       if (this.position) {
         return {
           width: `${this.width}px`,
-          height: `${this.height}px`,
+          height: `${this.height > window.innerHeight ? (window.innerHeight - 40) : this.height}px`,
           top: `${this.top}px`,
           left: `${this.left}px`,
-          zIndex: this.zIndex,
           margin: 'unset'
         }
       }
@@ -396,6 +438,7 @@ export default {
   right: 0;
   bottom: 0;
   overflow: hidden;
+  z-index: 2;
 }
 .iv-custom-model{
   position: absolute;
@@ -405,7 +448,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
@@ -413,6 +455,9 @@ export default {
     background: #fff;
     border-bottom: 1px solid @borderColor;
     position: relative;
+    .title-icon{
+      margin: -7px 0 0 15px;
+    }
     &-title{
       width: auto;
       font-weight: normal;
@@ -421,12 +466,12 @@ export default {
     }
     .close{
       position: absolute;
-      font-size: 20px;
+      font-size: 22px;
       top: 12px;
       right: 12px;
       cursor: pointer;
     }
-    .ivu-icon{
+    .full{
       position: absolute;
       font-size: 20px;
       top: 13px;
