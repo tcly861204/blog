@@ -7,10 +7,47 @@ tags: [es6]
 copyright: ture
 ---
 
+# Fetch
+fetch是用来取代传统的XMLHttpRequest的。 它的优点很多，包括链式调用的语法、返回promise等。
+fetch api是基于promise的设计，它是为了取代传统xhr的不合理的写法而生的。
+
+# 传统ajax
+xhr请求写起来非常的混乱，如下所示
+
 ```
-当我们谈及Ajax技术的时候，通常意思就是基于XMLHttpRequest的Ajax，它是一种能够有效改进页面通信的技术。 
-XMLHttpRequest的最新替代技术——Fetch API， 它是W3C的正式标准
+var xhr = new XMLHttpRequest();
+xhr.open('GET', url);
+xhr.responseType = 'json';
+xhr.onload = function() {
+  console.log(xhr.response);
+};
+xhr.onerror = function() {
+  console.log("Oops, error");
+};
+xhr.send();
 ```
+
+但是使用fetch之后，如下所示：
+```
+fetch(url).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  console.log(data);
+}).catch(function(e) {
+  console.log("Oops, error");
+});
+
+```
+这种链式调用的风格看上去会非常舒服。
+
+如果我们再使用了箭头函数就会更加简洁了。 
+```
+fetch(url).then(response => response.json())
+  .then(data => console.log(data))
+  .catch(e => console.log("Oops, error", e))
+```　
+通过使用fetch api，可以将传统的xhr的粗糙的使用方法转化的如此精简，实在是好！
+
 
 # Fetch API
 
@@ -52,9 +89,7 @@ Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS" //Restful请求规�
 # fetch-jsonp跨域是可以支持jsonp跨域
 > npm install fetch-jsonp
 
-```
 //fetch所支持的jsonp发送数据请求 function getFetchJSONP(){ // return fetchJsonp('https://api.douban.com/v2/book/1220562',{ return fetchJsonp('http://localhost:3001/getjsonp',{ //告诉fetchjsonp使用jsonp跨域 jsonpCallback: 'callback' }) .then(function (response) { //拿到整个响应数据 //返回响应中的主要数据 return response.json(); }) } getFetchJSONP().then(function (data) { console.log(data); })
-```
 
 # JSONP、CORS、服务器跨域 3种跨域方案
 
