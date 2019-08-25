@@ -9,8 +9,8 @@ copyright: ture
 
 本文列举了一些列比较不常见的Web API，内容较多，所以有关兼容性的内容在本文不会出现，大家可以自己去查阅。 以下案例能配动图的我尽量去配了，以免内容枯草乏味，但是如果内容有误，也请大家亲喷或者纠正👌
 
-方法列表
----
+# 方法列表
+
 1. querySelector（元素向下查询，返回一个）
 2. querySelectorAll（元素向下查询，返回多个）
 3. closest（元素向上查询）
@@ -35,7 +35,7 @@ copyright: ture
 
 # 逐个击破
 
-1. querySelector
+## querySelector
 都9102年了，还在用getElementById吗😭
 获取指定元素中匹配css选择器的元素：
 
@@ -50,25 +50,29 @@ let nav = dodocument.querySelector("#nav");
 nav.querySelector("li"); // 如果有多个li的话，返回第一个li
 ```
 
-2. querySelectorAll
+## querySelectorAll
 获取指定元素中匹配css选择器的所有元素：
+
 ```
 let list = document.querySelectorAll("li");  // NodeList(2) [li, li] 这里假设返回2个
 ```
+
 注意：返回的值是一个类数组，无法使用数组的原生方法（`forEach`、`map`等），需要转换一下：
 
 ```
 Array.from(list).map();
 ```
 
-3. closest
+## closest
 跟querySelector相反，该元素可以向上查询，也就是可以查询到父元素：
+
 ```
 document.querySelector("li").closest("#nav");
 ```
 
-4. dataset
+## dataset
 就跟原生微信小程序一样，能获取标签上以"data-"为前缀的属性集合：
+
 ```
 <p data-name="蜘蛛侠" data-age="16"></p>
 ```
@@ -78,13 +82,15 @@ document.querySelector("p").dataset; // {name: "蜘蛛侠", age: "16"}
 注意：虽然可以用`getAttribute`方法获取任何属性值，但是性质却不一样，这是开发规范问题，凡是自定义属性都要加上data-前缀哦✅
 
 
-5. URLSearchParams
+## URLSearchParams
+
 假设浏览器的url参数是 "?name=蜘蛛侠&age=16"
+
 ```
 new URLSearchParams(location.search).get("name"); // 蜘蛛侠
 ```
 
-6. hidden
+## hidden
 这是一个html属性，规定元素是否隐藏，表现跟css的display: none一致：
 ```
 <div hidden>我被隐藏了</div>
@@ -92,9 +98,11 @@ document.querySelector("div").hidden = true / false;
 ```
 
 
-7. contenteditable
+## contenteditable
 可以使一个元素可以被用户编辑：
 ```
 <p contenteditable>我是P元素，但是我也可以被编辑</p>
 ```
+
+
 
