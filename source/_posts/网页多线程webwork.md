@@ -47,7 +47,7 @@ onmessage = function (event) {
 
 
 // work.js 内部可以通过ajax 或 fetch 与服务端交互
-`fetch 推荐`
+// fetch 推荐
 addEventListener("message", function(event) {
   let postData = JSON.parse(event.data);
   fetch(`date.json?a=${postData.a}&b=${postData.b}`).then(function(response) {
@@ -60,7 +60,7 @@ addEventListener("message", function(event) {
   });
 }, false);
 
-`ajax版`
+// ajax版
 addEventListener("message", function(event) {
   let postData = JSON.parse(event.data);
   let xhr = new XMLHttpRequest();
