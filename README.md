@@ -7,7 +7,7 @@
 
 
 1. [koa构建大型项目](https://tcly861204.github.io/2019/05/14/koa构建大型项目/)
-2. [这些Web API真的有用吗](https://tcly861204.github.io/2019/08/25/这些WebAPI真的有用吗/)
+2. [这些WebAPI真的有用吗](https://tcly861204.github.io/2019/08/25/这些WebAPI真的有用吗/)
 3. [vue窗口自定义窗口](https://tcly861204.github.io/2019/07/31/vue窗口自定义窗口/)
 4. [48个JS开发常用工具函数](https://tcly861204.github.io/2019/07/05/48个JS开发常用工具函数/)
 5. [网页多线程webwork](https://tcly861204.github.io/2019/08/23/网页多线程webwork/)
